@@ -9,6 +9,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    // 닉네임 형식 검증
     public boolean isValidNicknameFormat(String nickname) {
         // 숫자,영어,한글 + 15자 이하 2자 이상
         if (nickname == null || nickname.length() > 15 || nickname.length() < 2)
@@ -18,6 +19,7 @@ public class UserService {
         return nickname.matches(regex);
     }
 
+    // 비밀번호 형식 검
     public boolean isValidPasswordFormat(String password) {
         // 특수문자, 영어, 숫자 포함 + 100자 이하 8자 이상
         if (password == null || password.length() > 100 || password.length() < 8) {

@@ -34,6 +34,16 @@ public class MemoryUserRepository implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByEmail(String email) {
+        return store.values().stream().filter(user -> user.getEmail().equals(email)).findAny();
+    }
+
+    @Override
+    public Optional<User> findByNickname(String nickname) {
+        return store.values().stream().filter(user -> user.getNickname().equals(nickname)).findAny();
+    }
+
+    @Override
     public List<User> findAll() {
         // 전체 유저를 리스트로 객체 생성해 반환
         return new ArrayList<>(store.values());
