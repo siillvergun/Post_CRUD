@@ -1,9 +1,10 @@
-package com.siillvergun.PostBoardTest.repository;
+package com.siillvergun.PostBoardTest.Comment;
 
-import com.siillvergun.PostBoardTest.entity.Comment;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 public class MemoryCommentRepository implements CommentRepository {
 
     private static Long seq = 0L;

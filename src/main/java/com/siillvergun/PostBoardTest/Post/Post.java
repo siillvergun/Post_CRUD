@@ -1,9 +1,16 @@
-package com.siillvergun.PostBoardTest.entity;
+package com.siillvergun.PostBoardTest.Post;
+
+import com.siillvergun.PostBoardTest.User.User;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class Post {
     private Long postId;
+    // ERD를 보면 외래키가 숫자이기 때문에 userId를 받아와야하는게 아닌가 생각했지만
+    // 자바 코드 상으로는 객체를 중심으로 생각하는게 더 좋음
+    // 이렇게 작성하면 다른 모든 정보에 접근 가능
     private User author;
     private String title;
     private String content;
@@ -40,34 +47,4 @@ public class Post {
         this.postId = id;
     }
 
-    public Long getPostId() {
-        return postId;
-    }
-
-    // ERD를 보면 외래키가 숫자이기 때문에 userId를 받아와야하는게 아닌가 생각했지만
-    // 자바 코드 상으로는 객체를 중심으로 생각하는게 더 좋음
-    // 이렇게 작성하면 다른 모든 정보에 접근 가능
-    public User getAuthor() {
-        return author;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
 }

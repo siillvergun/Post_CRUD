@@ -1,9 +1,10 @@
-package com.siillvergun.PostBoardTest.repository;
+package com.siillvergun.PostBoardTest.User;
 
-import com.siillvergun.PostBoardTest.entity.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 // 진짜 데이터베이스를 연결하기 전, 컴퓨터의 메모리(RAM)를 임시 저장소로 사용하는 클래스. 데이터베이스의 테이블을 자바의 자료구조로 흉내 낸 것
 public class MemoryUserRepository implements UserRepository {
     // 키: 유저의 ID, 값: 유저 객체

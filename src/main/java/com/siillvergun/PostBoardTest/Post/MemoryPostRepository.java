@@ -1,9 +1,10 @@
-package com.siillvergun.PostBoardTest.repository;
+package com.siillvergun.PostBoardTest.Post;
 
-import com.siillvergun.PostBoardTest.entity.Post;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 public class MemoryPostRepository implements PostRepository {
     private static Long seq = 0L;
     private static Map<Long, Post> store = new HashMap<>();

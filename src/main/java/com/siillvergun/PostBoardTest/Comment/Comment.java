@@ -1,7 +1,12 @@
-package com.siillvergun.PostBoardTest.entity;
+package com.siillvergun.PostBoardTest.Comment;
+
+import com.siillvergun.PostBoardTest.Post.Post;
+import com.siillvergun.PostBoardTest.User.User;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class Comment {
     private Post post;
     private User author;
@@ -34,32 +39,8 @@ public class Comment {
         this.updatedAt = updatedAt;
     }
 
-    public Post getPost() {
-        return post;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public Long getCommentId() {
-        return commentId;
-    }
-
     public void assignCommentId(Long id) {
         this.commentId = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
     }
 
 }

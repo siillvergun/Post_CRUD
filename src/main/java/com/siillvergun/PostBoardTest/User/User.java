@@ -1,7 +1,10 @@
-package com.siillvergun.PostBoardTest.entity;
+package com.siillvergun.PostBoardTest.User;
+
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class User {
     private Long userId;
     private String email;
@@ -33,34 +36,7 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
     public void assignUserId(Long id) {
         this.userId = id;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-
 }
-

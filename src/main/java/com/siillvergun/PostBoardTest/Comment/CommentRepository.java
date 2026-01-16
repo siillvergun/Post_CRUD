@@ -1,6 +1,4 @@
-package com.siillvergun.PostBoardTest.repository;
-
-import com.siillvergun.PostBoardTest.entity.Comment;
+package com.siillvergun.PostBoardTest.Comment;
 
 import java.util.List;
 import java.util.Optional;
