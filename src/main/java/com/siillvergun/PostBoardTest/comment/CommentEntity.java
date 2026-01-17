@@ -1,27 +1,26 @@
-package com.siillvergun.PostBoardTest.Comment;
+package com.siillvergun.PostBoardTest.comment;
 
-import com.siillvergun.PostBoardTest.Post.Post;
-import com.siillvergun.PostBoardTest.User.User;
+import com.siillvergun.PostBoardTest.user.UserEntity;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class Comment {
-    private Post post;
-    private User author;
+public class CommentEntity {
+    private com.siillvergun.PostBoardTest.post.Entity entity;
+    private UserEntity author;
     private Long commentId;
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Comment() {
+    public CommentEntity() {
 
     }
 
     // 1. 새로운 댓글을 "처음" 만들 때 쓰는 생성자
-    public Comment(Post post, User author, Long commentId, String content) {
-        this.post = post;
+    public CommentEntity(com.siillvergun.PostBoardTest.post.Entity entity, UserEntity author, Long commentId, String content) {
+        this.entity = entity;
         this.author = author;
         this.commentId = commentId;
         this.content = content;
@@ -30,8 +29,8 @@ public class Comment {
     }
 
     // 2. 이미 존재하는 데이터(DB 등)를 "불러올" 때 쓰는 생성자
-    public Comment(Post post, User author, Long commentId, String content, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.post = post;
+    public CommentEntity(com.siillvergun.PostBoardTest.post.Entity entity, UserEntity author, Long commentId, String content, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.entity = entity;
         this.author = author;
         this.commentId = commentId;
         this.content = content;

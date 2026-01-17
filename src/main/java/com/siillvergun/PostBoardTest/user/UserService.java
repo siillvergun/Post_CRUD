@@ -1,8 +1,6 @@
-package com.siillvergun.PostBoardTest.User;
+package com.siillvergun.PostBoardTest.user;
 
-import org.springframework.stereotype.Service;
-
-@Service
+@org.springframework.stereotype.Service
 public class UserService {
     private final UserRepository userRepository;
 

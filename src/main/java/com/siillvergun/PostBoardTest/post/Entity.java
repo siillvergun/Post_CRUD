@@ -1,28 +1,28 @@
-package com.siillvergun.PostBoardTest.Post;
+package com.siillvergun.PostBoardTest.post;
 
-import com.siillvergun.PostBoardTest.User.User;
+import com.siillvergun.PostBoardTest.user.UserEntity;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class Post {
+public class Entity {
     private Long postId;
     // ERD를 보면 외래키가 숫자이기 때문에 userId를 받아와야하는게 아닌가 생각했지만
     // 자바 코드 상으로는 객체를 중심으로 생각하는게 더 좋음
     // 이렇게 작성하면 다른 모든 정보에 접근 가능
-    private User author;
+    private UserEntity author;
     private String title;
     private String content;
     private String img;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Post() {
+    public Entity() {
     }
 
     // 1. 새로운 게시글을 "처음" 만들 때 쓰는 생성자
-    public Post(Long postId, User author, String title, String content, String img) {
+    public Entity(Long postId, UserEntity author, String title, String content, String img) {
         this.postId = postId;
         this.author = author;
         this.title = title;
@@ -33,7 +33,7 @@ public class Post {
     }
 
     // 2. 이미 존재하는 데이터(DB 등)를 "불러올" 때 쓰는 생성자
-    public Post(Long postId, User author, String title, String content, String img, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Entity(Long postId, UserEntity author, String title, String content, String img, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.postId = postId;
         this.author = author;
         this.title = title;

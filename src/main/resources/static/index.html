@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>My Simple Blog</title>
+    <meta content="간단한 블로그 템플릿" name="description"/>
+    <style>
+        :root {
+          --bg: #0b0d10;
+          --panel: #131722;
+          --text: #e9eef6;
+          --muted: #a9b4c4;
+          --line: rgba(255,255,255,0.10);
+          --accent: #7aa2ff;
+          --accent2: #7dffb2;
+          --radius: 14px;
+          --shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+          margin: 0;
+          font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+          background: radial-gradient(1200px 700px at 20% -10%, rgba(122,162,255,0.25), transparent 55%),
+                      radial-gradient(900px 600px at 90% 10%, rgba(125,255,178,0.14), transparent 55%),
+                      var(--bg);
+          color: var(--text);
+          line-height: 1.6;
+        }
+        a { color: inherit; text-decoration: none; }
+        .wrap { max-width: 1120px; margin: 0 auto; padding: 20px; }
+
+        /* Header */
+        header {
+          position: sticky;
+          top: 0;
+          z-index: 10;
+          backdrop-filter: blur(10px);
+          background: rgba(11,13,16,0.65);
+          border-bottom: 1px solid var(--line);
+        }
+        .nav {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          padding: 14px 20px;
+          max-width: 1120px;
+          margin: 0 auto;
+        }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 0.2px; }
+        .logo {
+          width: 34px; height: 34px; border-radius: 10px;
+          background: linear-gradient(135deg, var(--accent), var(--accent2));
+          box-shadow: 0 8px 20px rgba(122,162,255,0.25);
+        }
+        .navlinks { display: flex; align-items: center; gap: 14px; }
+        .navlinks a {
+          padding: 8px 10px;
+          border-radius: 10px;
+          color: var(--muted);
+        }
+        .navlinks a:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+        .search {
+          display: flex; align-items: center; gap: 8px;
+          padding: 8px 10px;
+          border: 1px solid var(--line);
+          border-radius: 12px;
+          background: rgba(255,255,255,0.03);
+          min-width: 240px;
+        }
+        .search input {
+          width: 100%;
+          border: 0;
+          outline: 0;
+          background: transparent;
+          color: var(--text);
+          font-size: 14px;
+        }
+        .kbd {
+          font-size: 12px;
+          color: var(--muted);
+          border: 1px solid var(--line);
+          padding: 2px 6px;
+          border-radius: 8px;
+          background: rgba(255,255,255,0.03);
+          user-select: none;
+        }
+
+        /* Hero */
+        .hero {
+          margin-top: 18px;
+          padding: 26px;
+          border-radius: var(--radius);
+          background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+          border: 1px solid var(--line);
+          box-shadow: var(--shadow);
+        }
+        .hero h1 { margin: 0 0 8px; font-size: 28px; }
+        .hero p { margin: 0; color: var(--muted); max-width: 70ch; }
+        .hero .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+        .chip {
+          padding: 7px 10px;
+          border: 1px solid var(--line);
+          border-radius: 999px;
+          background: rgba(255,255,255,0.03);
+          color: var(--muted);
+          font-size: 13px;
+        }
+
+        /* Layout */
+        main {
+          display: grid;
+          grid-template-columns: 1.7fr 1fr;
+          gap: 18px;
+          margin-top: 18px;
+          align-items: start;
+        }
+        @media (max-width: 920px) {
+          main { grid-template-columns: 1fr; }
+          .search { min-width: 0; }
+        }
+
+        /* Cards */
+        .card {
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          background: rgba(255,255,255,0.03);
+          box-shadow: var(--shadow);
+          overflow: hidden;
+        }
+        .card-header {
+          padding: 16px 16px 12px;
+          border-bottom: 1px solid var(--line);
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          gap: 10px;
+        }
+        .card-header h2 { margin: 0; font-size: 16px; }
+        .card-header span { color: var(--muted); font-size: 13px; }
+        .card-body { padding: 14px 16px 16px; }
+
+        /* Post list */
+        .post {
+          padding: 14px 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .post:last-child { border-bottom: 0; padding-bottom: 0; }
+        .meta {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px 10px;
+          color: var(--muted);
+          font-size: 13px;
+          margin-bottom: 6px;
+          align-items: center;
+        }
+        .badge {
+          font-size: 12px;
+          padding: 2px 8px;
+          border-radius: 999px;
+          border: 1px solid var(--line);
+          background: rgba(255,255,255,0.03);
+          color: var(--muted);
+        }
+        .post h3 { margin: 0 0 6px; font-size: 18px; }
+        .post p { margin: 0 0 10px; color: var(--muted); }
+        .actions {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+        }
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 9px 12px;
+          border-radius: 12px;
+          border: 1px solid var(--line);
+          background: rgba(255,255,255,0.03);
+          color: var(--text);
+          font-size: 14px;
+          cursor: pointer;
+          user-select: none;
+        }
+        .btn:hover { background: rgba(255,255,255,0.06); }
+        .btn.primary {
+          border-color: rgba(122,162,255,0.45);
+          background: rgba(122,162,255,0.12);
+        }
+
+        /* Sidebar */
+        .list { display: grid; gap: 10px; }
+        .item {
+          padding: 12px;
+          border: 1px solid var(--line);
+          border-radius: 12px;
+          background: rgba(255,255,255,0.02);
+        }
+        .item strong { display: block; font-size: 14px; margin-bottom: 4px; }
+        .item small { color: var(--muted); }
+        .footer {
+          margin: 22px 0 8px;
+          color: var(--muted);
+          font-size: 13px;
+          text-align: center;
+        }
+
+        /* Modal (simple) */
+        dialog {
+          border: 1px solid var(--line);
+          border-radius: 16px;
+          background: #0f131c;
+          color: var(--text);
+          width: min(720px, calc(100% - 40px));
+          box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        dialog::backdrop { background: rgba(0,0,0,0.55); }
+        .modal-head {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 14px 16px;
+          border-bottom: 1px solid var(--line);
+        }
+        .modal-head h3 { margin: 0; font-size: 16px; }
+        .modal-body { padding: 14px 16px 18px; color: var(--muted); }
+        .close {
+          border: 1px solid var(--line);
+          border-radius: 10px;
+          padding: 6px 10px;
+          background: rgba(255,255,255,0.03);
+          color: var(--text);
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <div class="brand">
+            <div aria-hidden="true" class="logo"></div>
+            <div>My Simple Blog</div>
+        </div>
+
+        <nav aria-label="메인 메뉴" class="navlinks">
+            <a href="#posts">글</a>
+            <a href="#about">소개</a>
+            <a href="#contact">문의</a>
+        </nav>
+
+        <div aria-label="검색" class="search" role="search">
+            <span style="opacity:.7">⌕</span>
+            <input autocomplete="off" id="searchInput" placeholder="제목/태그 검색" type="search"/>
+            <span class="kbd">Ctrl K</span>
+        </div>
+    </div>
+</header>
+
+<div class="wrap">
+    <section class="hero" id="about">
+        <h1>기록을 남기는 가장 단순한 블로그</h1>
+        <p>
+            단일 HTML 파일로 동작하는 예시 템플릿입니다. 글 목록, 검색(프론트에서 필터), 간단한 모달(상세보기)을 제공합니다.
+        </p>
+        <div aria-label="태그" class="chips">
+            <span class="chip">#Spring</span>
+            <span class="chip">#Redis</span>
+            <span class="chip">#JPA</span>
+            <span class="chip">#DevLog</span>
+        </div>
+    </section>
+
+    <main>
+        <!-- Posts -->
+        <section aria-label="글 목록" class="card" id="posts">
+            <div class="card-header">
+                <h2>최근 글</h2>
+                <span id="resultCount">3 posts</span>
+            </div>
+            <div class="card-body" id="postList">
+                <article class="post" data-tags="redis pubsub stream messaging" data-title="Redis Pub/Sub vs Stream">
+                    <div class="meta">
+                        <span class="badge">Redis</span>
+                        <span>2026-01-17</span>
+                        <span>·</span>
+                        <span>5 min</span>
+                    </div>
+                    <h3>Redis Pub/Sub vs Stream: 언제 무엇을 쓸까</h3>
+                    <p>
+                        유실 가능성, 소비자 그룹, 재처리 전략 관점에서 Pub/Sub과 Stream을 비교합니다.
+                    </p>
+                    <div class="actions">
+                        <button class="btn primary" data-open="1">자세히 보기</button>
+                        <a class="btn" href="#contact">문의</a>
+                    </div>
+                </article>
+
+                <article class="post" data-tags="spring aop logging" data-title="Spring AOP 로깅 패턴">
+                    <div class="meta">
+                        <span class="badge">Spring</span>
+                        <span>2026-01-16</span>
+                        <span>·</span>
+                        <span>4 min</span>
+                    </div>
+                    <h3>실무에서 자주 쓰는 AOP 로깅 패턴</h3>
+                    <p>
+                        Controller/Service 레이어의 실행 시간 측정, Request ID 전파, 예외 로깅을 정리합니다.
+                    </p>
+                    <div class="actions">
+                        <button class="btn primary" data-open="2">자세히 보기</button>
+                        <a class="btn" href="#contact">문의</a>
+                    </div>
+                </article>
+
+                <article class="post" data-tags="jpa n+1 fetch join" data-title="JPA N+1 문제 정리">
+                    <div class="meta">
+                        <span class="badge">JPA</span>
+                        <span>2026-01-15</span>
+                        <span>·</span>
+                        <span>6 min</span>
+                    </div>
+                    <h3>N+1 문제: 원인과 해결(Fetch Join, EntityGraph)</h3>
+                    <p>
+                        N+1이 발생하는 조건과, fetch join / batch size / entity graph로 해결하는 흐름을 정리합니다.
+                    </p>
+                    <div class="actions">
+                        <button class="btn primary" data-open="3">자세히 보기</button>
+                        <a class="btn" href="#contact">문의</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside aria-label="사이드바" class="card">
+            <div class="card-header">
+                <h2>바로가기</h2>
+                <span>Quick</span>
+            </div>
+            <div class="card-body">
+                <div class="list">
+                    <div class="item">
+                        <strong>프로필</strong>
+                        <small>기록/회고/기술 정리를 위한 공간</small>
+                    </div>
+                    <div class="item">
+                        <strong>카테고리</strong>
+                        <small>Spring · Redis · JPA · Infra</small>
+                    </div>
+                    <div class="item" id="contact">
+                        <strong>문의</strong>
+                        <small>contact@example.com</small>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <div class="footer">
+        © <span id="year"></span> My Simple Blog. All rights reserved.
+    </div>
+</div>
+
+<!-- Modals -->
+<dialog id="modal">
+    <div class="modal-head">
+        <h3 id="modalTitle">제목</h3>
+        <button aria-label="닫기" class="close" id="closeModal">닫기</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+        내용
+    </div>
+</dialog>
+
+<script>
+    const posts = [
+      {
+        id: 1,
+        title: "Redis Pub/Sub vs Stream: 언제 무엇을 쓸까",
+        body:
+          "Pub/Sub은 구독자가 없으면 메시지가 유실될 수 있고, 수신 확인(ack)이나 재처리 개념이 없습니다.\n" +
+          "반면 Redis Stream은 메시지를 저장하고, Consumer Group 기반으로 처리/재처리/리트라이 전략을 설계할 수 있습니다.\n\n" +
+          "간단 알림(유실 허용) -> Pub/Sub\n" +
+          "업무 이벤트(유실 불가, 재처리 필요) -> Stream(또는 MQ) 권장",
+        tags: ["redis", "pubsub", "stream"]
+      },
+      {
+        id: 2,
+        title: "실무에서 자주 쓰는 AOP 로깅 패턴",
+        body:
+          "AOP 로깅은 공통 관심사를 분리해 코드 중복을 줄이는 데 유용합니다.\n\n" +
+          "자주 쓰는 패턴:\n" +
+          "- 실행 시간 측정(@Around)\n" +
+          "- 예외 로깅(@AfterThrowing)\n" +
+          "- MDC로 Request ID/Trace ID 전파\n\n" +
+          "주의: 과도한 로그는 비용(저장/검색/성능)을 유발하므로 레벨과 샘플링 전략이 필요합니다.",
+        tags: ["spring", "aop", "logging"]
+      },
+      {
+        id: 3,
+        title: "N+1 문제: 원인과 해결(Fetch Join, EntityGraph)",
+        body:
+          "N+1은 연관관계 지연로딩 + 반복 접근 패턴에서 흔히 발생합니다.\n\n" +
+          "대표 해결:\n" +
+          "- JPQL fetch join\n" +
+          "- @EntityGraph\n" +
+          "- batch size 조정(hibernate.default_batch_fetch_size)\n\n" +
+          "목표는 '의도한 쿼리 수'로 데이터를 가져오도록 조회 전략을 통제하는 것입니다.",
+        tags: ["jpa", "n+1", "fetch", "join"]
+      }
+    ];
+
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+    // Footer year
+    $("#year").textContent = new Date().getFullYear();
+
+    // Search filter
+    const searchInput = $("#searchInput");
+    const postEls = $$("#postList .post");
+    const resultCount = $("#resultCount");
+
+    function applyFilter(q) {
+      const query = (q || "").trim().toLowerCase();
+      let shown = 0;
+
+      postEls.forEach((el) => {
+        const title = (el.dataset.title || "").toLowerCase();
+        const tags = (el.dataset.tags || "").toLowerCase();
+        const ok = !query || title.includes(query) || tags.includes(query);
+        el.style.display = ok ? "" : "none";
+        if (ok) shown++;
+      });
+
+      resultCount.textContent = `${shown} post${shown === 1 ? "" : "s"}`;
+    }
+
+    searchInput.addEventListener("input", (e) => applyFilter(e.target.value));
+
+    // Ctrl+K focus
+    window.addEventListener("keydown", (e) => {
+      const isMac = navigator.platform.toUpperCase().includes("MAC");
+      const isK = e.key.toLowerCase() === "k";
+      if ((isMac ? e.metaKey : e.ctrlKey) && isK) {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+
+    // Modal open/close
+    const modal = $("#modal");
+    const modalTitle = $("#modalTitle");
+    const modalBody = $("#modalBody");
+
+    function openPost(id) {
+      const p = posts.find(x => x.id === id);
+      if (!p) return;
+      modalTitle.textContent = p.title;
+      modalBody.textContent = p.body;
+      modal.showModal();
+    }
+
+    $$("#postList [data-open]").forEach((btn) => {
+      btn.addEventListener("click", () => openPost(Number(btn.dataset.open)));
+    });
+
+    $("#closeModal").addEventListener("click", () => modal.close());
+    modal.addEventListener("click", (e) => {
+      // 바깥 클릭 시 닫기
+      const rect = modal.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.bottom &&
+        rect.left <= e.clientX && e.clientX <= rect.right;
+      if (!inDialog) modal.close();
+    });
+</script>
+</body>
+</html>
